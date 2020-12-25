@@ -17,7 +17,8 @@ class GotService {
         return this._toFormatCharacter(data)
     }
     async getAllCharacters(page=1, size = 10) {
-        return this.getResource(`/characters?page=${page}&pageSize=${size}`)
+        const data = await this.getResource(`/characters?page=${page}&pageSize=${size}`)
+        return data.map(item=>this._toFormatCharacter(item))
     }
     _toFormatCharacter(char) {
         for (let i in char) {

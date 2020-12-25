@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components'
 const CharDetail = styled.div`
     background-color: #fff;
@@ -13,32 +13,41 @@ const SelectError = styled.div`
     color: #fff;
     text-align: center;
     font-size: 26px;
-`;
-export default class CharDetails extends Component {
+`
+const CharDet = (props) => {
+    const content = props.itemInfo ? <Char itemInfo={props.itemInfo} /> : 'No Data';
+    return (
+        <CharDetail className="rounded">
+            {content}
+        </CharDetail>
+    )
 
-    render() {
-        return (
-            <CharDetail className="rounded">
-                <TitleBlock>John Snow</TitleBlock>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Gender</span>
-                        <span>male</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Born</span>
-                        <span>1783</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Died</span>
-                        <span>1820</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Culture</span>
-                        <span>First</span>
-                    </li>
-                </ul>
-            </CharDetail>
-        );
-    }
+
+}
+export default CharDet;
+const Char = (props) => {
+    const { name, gender, born, died, culture } = props.itemInfo
+    return (
+        <>
+            <TitleBlock>{name}</TitleBlock>
+            <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Gender</span>
+                    <span>{gender}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Born</span>
+                    <span>{born}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Died</span>
+                    <span>{died}</span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <span className="term">Culture</span>
+                    <span>{culture}</span>
+                </li>
+            </ul>
+        </>
+    );
 }

@@ -1,23 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 const ListGroupItem = styled.div`
     cursor: pointer;
 `
-export default class ItemList extends Component {
-
-    render() {
+const ItemList = (props) => {
+    const elements = props.itemList.map((item, key) => {
         return (
-            <ul className="item-list list-group">
-                <ListGroupItem className="list-group-item">
-                    John Snow
-                </ListGroupItem>
-                <ListGroupItem className="list-group-item">
-                    Brandon Stark
-                </ListGroupItem>
-                <ListGroupItem className="list-group-item">
-                    Geremy
-                </ListGroupItem>
-            </ul>
-        );
-    }
+            <ListGroupItem onClick={()=>props.showItem(item)} key={key} className="list-group-item">
+                {item.name}
+            </ListGroupItem>
+        )
+    })
+    return (
+        <ul className="item-list list-group">
+            {elements}
+        </ul>
+    );
 }
+export default ItemList;
