@@ -15,10 +15,6 @@ const TitleOfRandomBlock = styled.h4`
 const Term = styled.span`
     font-weight: bold;
 `;
-
-
-
-
 const RandomChar = () => {
     const [loader, setLoader] = useState(true);
     const [error, setError] = useState(false);
@@ -38,9 +34,6 @@ const RandomChar = () => {
         let gotService = new GotService()
         gotService.getCharacter(id)
             .then((rs) => {
-                for (let i in rs) {
-                    console.log(i)
-                }
                 setPerson(rs)
                 setLoader(false)
             })
