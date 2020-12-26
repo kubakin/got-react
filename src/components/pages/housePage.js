@@ -5,8 +5,8 @@ import { Col, Row, Container, Button } from 'reactstrap';
 import React, { useState } from 'react';
 import GotService from '../../service/gotService';
 import Field from '../fieldFromList/field'
-
-const HousePage = () => {
+import {withRouter} from 'react-router-dom'
+const HousePage = (props) => {
     const [itemInfo, setInfo] = useState();
     const [showRandom, setShowRandom] = useState(true);
     const randomChar = showRandom ? <RandomItemWithFields start={1} end={10} getRandomItem={(id) => getService.getHouse(id)} /> : null;
@@ -29,21 +29,18 @@ const HousePage = () => {
 
             <Row>
                 <Col md='6'>
-                    <ItemList showItem={(showItem)} getItems={() => getService.getAllHouses(page, 3)}>
+                    <ItemList showItem={(idItem)=>props.history.push(`${idItem}`)} getItems={() => getService.getAllHouses(1, 3)}>
                     </ItemList>
 
                 </Col>
                 <Col md='6'>
-                    <CharDetails itemInfo={itemInfo} >
-                    <Field label='Region' item='region' />
-            <Field label='Армия' item='coatOfArms' />
-                    </CharDetails>
+                    
                 </Col>
             </Row>
         </Container>
     )
 }
-export default HousePage;
+export default withRouter(HousePage);
 const RandomItemWithFields = ({ getRandomItem, start, end }) => {
     return (
         <RandomItem start={start} end={end} getRandomItem={getRandomItem} >

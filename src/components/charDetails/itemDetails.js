@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 const CharDetail = styled.div`
     background-color: #fff;
@@ -16,7 +16,13 @@ const SelectError = styled.div`
 `
 
 const ItemDet = (props) => {
-    const content = props.itemInfo ? <Item chlds={props.children} itemInfo={props.itemInfo} /> : 'No Data';
+    const [data, setData] = useState()
+    useEffect(()=>{
+        props.getData(props.itemInfo)
+        .then(rs=>setData(rs))
+    },[props.itemInfo])
+    
+    const content = data ? <Item chlds={props.children} itemInfo={data} /> : 'No Data';
     return (
         <CharDetail className="rounded">
             {content}

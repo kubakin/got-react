@@ -19,7 +19,7 @@ const ItemList = (props) => {
     }, []);
     const elements = itemList.map((item, key) => {
         return (
-            <ListGroupItem onClick={()=>props.showItem(item)} key={key} className="list-group-item">
+            <ListGroupItem onClick={()=>props.showItem(key+1)} key={key} className="list-group-item">
                 {item.name}
             </ListGroupItem>
         )
