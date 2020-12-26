@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import GotService from '../../service/gotService';
 import Spinner from '../spinner/spinner'
 
 const ListGroupItem = styled.div`
@@ -11,8 +10,7 @@ const ItemList = (props) => {
     const [loader, setLoad] = useState(true);
 
     useEffect(() => {
-        const page = Math.floor(Math.random() * 10 + 1);
-        new GotService().getAllCharacters(page, 3)
+        props.getItems()
             .then(rs => {
                 setList(rs)
                 setLoad(false);

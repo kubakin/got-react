@@ -20,6 +20,22 @@ class GotService {
         const data = await this.getResource(`/characters?page=${page}&pageSize=${size}`)
         return data.map(item=>this._toFormatCharacter(item))
     }
+    async getAllBooks(page=1, size = 2) {
+        const data = await this.getResource(`/books?page=${page}&pageSize=${size}`)
+        return data.map(item=>this._toFormatBook(item))
+    }
+    async getAllHouses(page=1, size = 30) {
+        const data = await this.getResource(`/houses?page=${page}&pageSize=${size}`)
+        return data.map(item=>this._toFormatHouse(item))
+    }
+    async getBook(id=this.id) {
+        const data = await this.getResource(`/books/${id}`)
+        return this._toFormatBook(data)
+    }
+    async getHouse(id=this.id) {
+        const data = await this.getResource(`/houses/${id}`)
+        return this._toFormatHouse(data)
+    }
     _toFormatCharacter(char) {
         for (let i in char) {
             if (char[i] === '') {
@@ -32,6 +48,31 @@ class GotService {
             died: char.died,
             culture: char.culture,
             born: char.born
+        }
+    }
+    _toFormatBook(item) {
+        for (let i in item) {
+            if (item[i] === '') {
+                item[i] = 'Не задано'
+            }
+        }
+        return {
+            name: item.name,
+            numberOfPage: item.numberOfPage,
+            publisher: item.publisher,
+            country: item.country,
+        }
+    }
+    _toFormatHouse(item) {
+        for (let i in item) {
+            if (item[i] === '') {
+                item[i] = 'Не задано'
+            }
+        }
+        return {
+            name: item.name,
+            region: item.region,
+            coatOfArms: item.coatOfArms,
         }
     }
 }
